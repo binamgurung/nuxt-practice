@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="#03396c">
+    <v-app-bar app color="#005b96">
       <v-toolbar-title>
         <v-app-bar-nav-icon>
           <v-btn to="/" icon>
