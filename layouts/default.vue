@@ -1,19 +1,52 @@
 <template>
-  <div>
-    <header class="shadow-sm bg-white">
-      <nav class="container mx-auto p-4 flex justify-between">
-        <NuxtLink to="/" class="font-bold">Nuxt</NuxtLink>
-        <ul class="flex gap-4">
-          <li><NuxtLink to="/">Home</NuxtLink></li>
-          <li><NuxtLink to="/about">About</NuxtLink></li>
-          <li><NuxtLink to="/products" class="btn">Product</NuxtLink></li>
-        </ul>
-      </nav>
-    </header>
-  </div>
-  <div class="container mx-auto p-4">
-    <slot />
-  </div>
+  <v-app>
+    <v-app-bar app color="#03396c">
+      <v-toolbar-title>
+        <v-app-bar-nav-icon>
+          <v-btn to="/" icon>
+            <v-icon icon="mdi-home" />
+          </v-btn>
+        </v-app-bar-nav-icon>
+      </v-toolbar-title>
+      <v-toolbar-title>
+        <div class="d-flex">
+          <v-spacer class="text-end">
+            <NuxtLink
+              to="/products"
+              class="btn text-decoration-none text-primary"
+            >
+              Product
+            </NuxtLink>
+          </v-spacer>
+          <v-spacer class="text-end">
+            <NuxtLink to="/" class="btn text-decoration-none text-primary">
+              Home
+            </NuxtLink>
+          </v-spacer>
+          <v-spacer class="text-end">
+            <NuxtLink to="/about" class="btn text-decoration-none text-primary">
+              About
+            </NuxtLink>
+          </v-spacer>
+        </div>
+      </v-toolbar-title>
+      <v-toolbar-title>
+        <div class="d-flex justify-content-center">
+          <v-text-field
+            prepend-icon="mdi-magnify"
+            hide-details
+            single-line
+            class="pa-4"
+          ></v-text-field>
+        </div>
+      </v-toolbar-title>
+    </v-app-bar>
+    <v-main>
+      <v-container fluid>
+        <slot />
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 <style scoped>
 .router-link-exact-active {
