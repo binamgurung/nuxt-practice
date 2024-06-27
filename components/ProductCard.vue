@@ -8,13 +8,13 @@
           class="thumb position-relative"
         />
         <v-btn
-          class="ma-2 position-absolute top-0"
+          class="ma-2 position-absolute top-0 opacity-30"
           style="right: 40px; background: lightgrey"
         >
           <v-icon icon="mdi-cart" end></v-icon>
         </v-btn>
         <v-btn
-          class="ma-2 position-absolute"
+          class="ma-2 position-absolute opacity-30"
           style="top: 42px; right: 40px; background: lightgrey"
         >
           <v-icon icon="mdi-heart" end></v-icon>
