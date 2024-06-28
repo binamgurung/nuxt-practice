@@ -2,11 +2,17 @@
   <v-card height="250">
     <v-card-item>
       <div class="text-center">
-        <v-img
-          :src="product.image"
-          alt="product"
-          class="thumb position-relative"
-        />
+        <NuxtLink
+          class="text-decoration-none text-secondary"
+          :to="`products/${product.id}`"
+        >
+          <v-img
+            :src="product.image"
+            alt="product"
+            class="thumb position-relative"
+            style="cursor: pointer"
+          />
+        </NuxtLink>
         <v-btn
           class="ma-2 position-absolute top-0 opacity-30"
           style="right: 40px; background: lightgrey"

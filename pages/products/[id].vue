@@ -15,9 +15,7 @@ if (!product.value) {
     fatal: true,
   });
 }
-definePageMeta({
-  layout: "products",
-});
+
 </script>
 
 <style scoped></style>

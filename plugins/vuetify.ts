@@ -2,6 +2,7 @@
 import "@mdi/font/css/materialdesignicons.css";
 
 import "vuetify/styles";
+import { VNumberInput } from "vuetify/labs/VNumberInput";
 import { createVuetify, type ThemeDefinition } from "vuetify";
 
 const myCustomLightTheme: ThemeDefinition = {
@@ -22,6 +23,9 @@ const myCustomLightTheme: ThemeDefinition = {
 
 export default defineNuxtPlugin((app) => {
   const vuetify = createVuetify({
+    components: {
+      VNumberInput,
+    },
     theme: {
       defaultTheme: "myCustomLightTheme",
       themes: {

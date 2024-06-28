@@ -1,0 +1,4 @@
+.v-text-field .v-field--no-label input,
+.v-text-field .v-field--active input {
+  text-align: center !important;
+}

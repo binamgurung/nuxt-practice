@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <!-- Application Bar with Search Bar -->
-    <v-app-bar app color="#005b96">
+    <v-app-bar app color="secondary">
       <v-app-bar-nav-icon
         variant="text"
         @click.stop="drawer = !drawer"
@@ -54,6 +54,7 @@
         prepend-icon="mdi-magnify"
         variant="outlined"
         class="search-bar py-20"
+        clearable
       ></v-text-field>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" app temporary>
@@ -71,7 +72,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-main>
-      <v-container fluid class="10">
+      <v-container fluid class="pa-10">
         <slot />
       </v-container>
     </v-main>
