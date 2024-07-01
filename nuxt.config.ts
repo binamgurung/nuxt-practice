@@ -21,4 +21,9 @@ export default defineNuxtConfig({
     },
   },
   css: ["~/assets/css/custom.css"],
+  runtimeConfig: {
+    public: {
+      app_name: process.env.APP_NAME,
+    },
+  },
 });

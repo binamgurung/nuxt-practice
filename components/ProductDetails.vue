@@ -1,12 +1,12 @@
 <template>
   <v-card>
     <v-row class="pa-8">
-      <v-col cols="6" sm="12" md="6" lg="6" class="pa-8" style="height: 400px">
+      <v-col cols="12" sm="12" md="6" lg="6" class="pa-8" style="height: 400px">
         <v-img :src="product.image" alt="product image" />
       </v-col>
       <v-divider vertical></v-divider>
       <v-col
-        cols="6"
+        cols="12"
         sm="12"
         md="6"
         lg="6"
@@ -18,7 +18,7 @@
         <h3 class="font-bold border-b-2 mb-2 pb-2">Product Decription :</h3>
         <p class="mb-7 text-wrap">{{ product.description }}</p>
         <v-row>
-          <v-col cols="4" sm="12" md="12" lg="4" style="padding: 0">
+          <v-col cols="12" sm="6" md="12" lg="4" style="padding: 0">
             <div class="d-inline-flex align-items-center" style="width: 100%">
               <v-icon
                 icon="mdi-minus"
@@ -39,7 +39,7 @@
               ></v-icon>
             </div>
           </v-col>
-          <v-col cols="8" sm="12" md="12" lg="8" style="padding: 0">
+          <v-col cols="12" sm="6" md="12" lg="8" style="padding: 0">
             <v-btn
               class="ma-2 text-primary d-inline"
               color="secondary"
