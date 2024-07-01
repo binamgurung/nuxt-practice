@@ -87,7 +87,7 @@
       </v-container>
     </v-main>
     <v-footer color="secondary" text-primary>
-      <v-container class="mx-1 py-4">
+      <v-container style="max-width:100%;" class="mx-1 py-4">
         <v-row justify="center">
           <v-col cols="12" lg="3" md="3" sm="12" class="contact-us">
             <h3 class="pl-5">Contact Us</h3>
@@ -124,7 +124,6 @@
               ></v-list-item-title>
             </v-list-item>
           </v-col>
-
           <v-col
             cols="12"
             lg="6"
