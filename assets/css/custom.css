@@ -10,7 +10,9 @@
   padding: 10px;
   cursor: pointer;
 }
-
+.custom-footer {
+  flex: none !important;
+}
 /* Change the placeholder text color */
 .search-bar input::placeholder {
   color: gray;

@@ -26,4 +26,9 @@ export default defineNuxtConfig({
       app_name: process.env.APP_NAME,
     },
   },
+  app: {
+    head: {
+      title: process.env.APP_NAME,
+    },
+  },
 });
