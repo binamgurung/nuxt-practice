@@ -2,10 +2,7 @@
   <v-app>
     <!-- Application Bar with Search Bar -->
     <v-app-bar app color="secondary">
-      <v-app-bar-nav-icon
-        variant="text"
-        @click.stop="drawer = !drawer"
-      ></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer" />
       <v-toolbar-title class="app-name">{{
         $config.public.app_name
       }}</v-toolbar-title>
@@ -37,21 +34,49 @@
       </v-row>
 
       <!-- Navigation Icons -->
-      <v-toolbar-title class="nav-icon d-none d-lg-flex d-md-flex">
-        <v-row>
-          <v-col cols="6">
+      <v-row
+        class="d-none d-lg-flex d-md-flex text-center"
+        style="margin-top: -12px; width: 10px"
+      >
+        <v-col cols="3">
+          <v-toolbar-title class="nav-icon">
             <NuxtLink to="/" class="btn text-decoration-none">
-              <v-icon icon="mdi-cart" color="grey"></v-icon>
+              <v-icon icon="mdi-cart" color="grey" />
             </NuxtLink>
-          </v-col>
-          <v-col cols="6">
+          </v-toolbar-title>
+        </v-col>
+        <v-col cols="3">
+          <v-toolbar-title class="nav-icon">
             <NuxtLink to="/" class="btn text-decoration-none">
-              <v-icon icon="mdi-heart" color="grey"></v-icon>
+              <v-icon icon="mdi-heart" color="grey" />
             </NuxtLink>
-          </v-col>
-        </v-row>
-      </v-toolbar-title>
+          </v-toolbar-title>
+        </v-col>
+        <v-col cols="3" v-if="authenticated">
+          <v-toolbar-title class="nav-icon">
+            <NuxtLink to="/account" class="btn text-decoration-none">
+              <v-icon icon="mdi-home-account" color="grey" />
+            </NuxtLink>
+          </v-toolbar-title>
+        </v-col>
+        <v-col cols="3" v-if="authenticated">
+          <v-toolbar-title class="nav-icon">
+            <button @click.prevent="logout" class="btn text-decoration-none">
+              <v-icon icon="mdi-logout" color="grey" style="cursor: pointer">
+              </v-icon>
+            </button>
+          </v-toolbar-title>
+        </v-col>
+        <v-col cols="3" v-if="!authenticated">
+          <v-toolbar-title class="nav-icon">
+            <NuxtLink to="/login" class="btn text-decoration-none">
+              <v-icon icon="mdi-login" color="grey" />
+            </NuxtLink>
+          </v-toolbar-title>
+        </v-col>
+      </v-row>
 
+      <!-- Search Bar -->
       <v-toolbar-title>
         <v-row>
           <v-col cols="12">
@@ -61,12 +86,13 @@
               variant="outlined"
               class="search-bar py-20"
               clearable
-            ></v-text-field>
+            />
           </v-col>
         </v-row>
-        <!-- Search Bar -->
       </v-toolbar-title>
     </v-app-bar>
+
+    <!-- Navigation Drawer -->
     <v-navigation-drawer v-model="drawer" app temporary>
       <v-list dense>
         <v-list-item
@@ -74,18 +100,22 @@
           :key="item.title"
           @click="navigate(item.link)"
         >
-          <v-list-item-title class="d-inline-flex"
-            ><v-icon>{{ item.icon }}</v-icon
-            >{{ item.title }}</v-list-item-title
-          >
+          <v-list-item-title class="d-inline-flex">
+            <v-icon>{{ item.icon }}</v-icon
+            >{{ item.title }}
+          </v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+
+    <!-- Main Content -->
     <v-main>
       <v-container fluid class="pa-10">
         <slot />
       </v-container>
     </v-main>
+
+    <!-- Footer -->
     <v-footer color="secondary" text-primary class="custom-footer">
       <v-container style="max-width: 100%" class="mx-1 py-4">
         <v-row justify="center">
@@ -104,7 +134,7 @@
                 v-text="contact.content"
                 class="footer-text-list"
                 style="white-space: inherit"
-              ></v-list-item-title>
+              />
             </v-list-item>
           </v-col>
           <v-col cols="12" lg="3" md="3" sm="12" class="services">
@@ -121,7 +151,7 @@
               <v-list-item-title
                 v-text="service.content"
                 style="white-space: inherit"
-              ></v-list-item-title>
+              />
             </v-list-item>
           </v-col>
           <v-col
@@ -151,34 +181,47 @@
     </v-footer>
   </v-app>
 </template>
-<script>
-export default {
-  data: () => ({
-    drawer: false, // State to control the drawer visibility
-    items: [
-      { title: "Home", icon: "mdi-home", link: "/" },
-      { title: "Products", icon: "mdi-cube-outline", link: "/products" },
-      { title: "About", icon: "mdi-information", link: "/about" },
-    ],
-    links: ["Home", "About Us", "Team", "Services", "Blog"],
-    contacts: [
-      { icon: "mdi-phone", content: "9800100001" },
-      { icon: "mdi-email", content: "test@gmail.com" },
-      { icon: "mdi-map-marker", content: "Parshyang, Pokhara-5" },
-    ],
-    services: [
-      { icon: "mdi-truck", content: "Delivery Service" },
-      { icon: "mdi-headset", content: "Customer Service" },
-      { icon: "mdi-package-variant", content: "Return Policy" },
-    ],
-  }),
-  methods: {
-    navigate(link) {
-      this.$router.push(link);
-      this.drawer = false;
-    },
-  },
-  layout: "footer",
+
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { storeToRefs } from "pinia";
+import { useAuthStore } from "~/store/auth";
+
+// Local state
+const drawer = ref(false);
+const items = ref([
+  { title: "Home", icon: "mdi-home", link: "/" },
+  { title: "Products", icon: "mdi-cube-outline", link: "/products" },
+  { title: "About", icon: "mdi-information", link: "/about" },
+]);
+const links = ref(["Home", "About Us", "Team", "Services", "Blog"]);
+const contacts = ref([
+  { icon: "mdi-phone", content: "9800100001" },
+  { icon: "mdi-email", content: "test@gmail.com" },
+  { icon: "mdi-map-marker", content: "Parshyang, Pokhara-5" },
+]);
+const services = ref([
+  { icon: "mdi-truck", content: "Delivery Service" },
+  { icon: "mdi-headset", content: "Customer Service" },
+  { icon: "mdi-package-variant", content: "Return Policy" },
+]);
+
+// Pinia store
+const router = useRouter();
+const { logUserOut } = useAuthStore();
+const { authenticated } = storeToRefs(useAuthStore());
+
+// Methods
+const navigate = (link) => {
+  router.push(link);
+  drawer.value = false;
+};
+
+const logout = () => {
+  logUserOut();
+  router.push("/login");
 };
 </script>
+
 <style scoped></style>
