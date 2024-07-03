@@ -74,10 +74,10 @@
           :key="item.title"
           @click="navigate(item.link)"
         >
-          <v-list-item-content class="d-inline-flex">
-            <v-icon>{{ item.icon }}</v-icon>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title class="d-inline-flex"
+            ><v-icon>{{ item.icon }}</v-icon
+            >{{ item.title }}</v-list-item-title
+          >
         </v-list-item>
       </v-list>
     </v-navigation-drawer>

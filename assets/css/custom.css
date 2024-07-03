@@ -13,6 +13,18 @@
 .custom-footer {
   flex: none !important;
 }
+.parent-sign-up {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.child-sign-up {
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  width: 50%;
+  height: 80%;
+}
 /* Change the placeholder text color */
 .search-bar input::placeholder {
   color: gray;
