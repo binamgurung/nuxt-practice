@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     transpile: ["vuetify"],
   },
   modules: [
+    "@pinia/nuxt",
     (_options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) => {
         // @ts-expect-error
@@ -13,6 +14,9 @@ export default defineNuxtConfig({
     },
     //...
   ],
+  imports: {
+    dirs: ["stores"], // Automatically import stores from the stores directory
+  },
   vite: {
     vue: {
       template: {
