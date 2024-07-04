@@ -22,10 +22,11 @@ export const useAuthStore = defineStore("auth", {
       this.loading = true;
       try {
         const { data } = await axios.post<UserResponse>(
-          "https://dummyjson.com/auth/login",
+          "https://dummyjson.com/user/login",
           {
             username,
             password,
+            expiresInMins: 30,
           },
           {
             headers: { "Content-Type": "application/json" },

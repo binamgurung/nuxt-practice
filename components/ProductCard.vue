@@ -63,7 +63,6 @@ const addToCart = async () => {
         },
       }
     );
-    console.log(data);
   } catch (error) {
     console.error("Error adding to cart:", error);
   }
