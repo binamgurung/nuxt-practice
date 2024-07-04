@@ -24,7 +24,7 @@
         <v-btn
           class="px-6 ml-4"
           color="primary"
-          style="width: 95%; background: #005b96"
+          style="width: 95%; background: black"
           @click.prevent="login"
           >Login
         </v-btn>
