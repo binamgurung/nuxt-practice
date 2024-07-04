@@ -16,6 +16,7 @@
         <v-btn
           class="ma-2 position-absolute top-0 opacity-30"
           style="right: 40px; background: lightgrey"
+          @click="addToCart"
         >
           <v-icon icon="mdi-cart" end></v-icon>
         </v-btn>
@@ -38,7 +39,15 @@
 </template>
 
 <script setup>
+import { useUserStore } from "~/store/user";
+
+const userStore = useUserStore();
 const { product } = defineProps(["product"]);
+const addToCart = async () => {
+  if (!userStore.user) {
+    await userStore.fetchUser();
+  }
+};
 </script>
 
 <style scoped>
