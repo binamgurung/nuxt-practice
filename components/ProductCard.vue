@@ -7,7 +7,7 @@
           :to="`products/${product.id}`"
         >
           <v-img
-            :src="product.image"
+            :src="product.thumbnail"
             alt="product"
             class="thumb position-relative"
             style="cursor: pointer"
@@ -40,12 +40,32 @@
 
 <script setup>
 import { useUserStore } from "~/store/user";
+import axios from "axios";
 
 const userStore = useUserStore();
 const { product } = defineProps(["product"]);
+
 const addToCart = async () => {
   if (!userStore.user) {
     await userStore.fetchUser();
+  }
+  const userId = userStore.user.id; // Get the user ID
+  try {
+    const { data } = await axios.post(
+      "https://dummyjson.com/carts/add",
+      {
+        userId: userId,
+        products: [product], // Assuming product is an object, wrap it in an array
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log(data);
+  } catch (error) {
+    console.error("Error adding to cart:", error);
   }
 };
 </script>

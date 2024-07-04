@@ -2,7 +2,7 @@
   <v-card>
     <v-row class="pa-8">
       <v-col cols="12" sm="12" md="6" lg="6" class="pa-8" style="height: 400px">
-        <v-img :src="product.image" alt="product image" />
+        <v-img :src="product.thumbnail" alt="product image" />
       </v-col>
       <v-divider vertical></v-divider>
       <v-col

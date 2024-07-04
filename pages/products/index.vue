@@ -14,8 +14,9 @@ const products = ref([]);
 
 onMounted(async () => {
   try {
-    const response = await axios.get("https://fakestoreapi.com/products");
-    products.value = response.data;
+    const response = await axios.get("https://dummyjson.com/products");
+    products.value = response.data.products;
+    console.log(products.value);
   } catch (error) {
     console.error("Error fetching products:", error);
   }
