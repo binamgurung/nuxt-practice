@@ -4,12 +4,12 @@
     <v-app-bar app color="secondary">
       <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer" />
       <v-toolbar-title class="app-name">
-        <NuxtLink to="/" style="text-decoration: none; cursor: pointer;color:#FFFFFF;">
-          {{
-            $config.public.app_name
-          }}
+        <NuxtLink
+          to="/"
+          style="text-decoration: none; cursor: pointer; color: #ffffff"
+        >
+          {{ $config.public.app_name }}
         </NuxtLink>
-
       </v-toolbar-title>
 
       <!-- Navigation List -->
@@ -58,41 +58,53 @@
       >
         <v-col cols="3" md="3" lg="3">
           <v-toolbar-title class="nav-icon">
-            <NuxtLink to="/cart" class="btn text-decoration-none">
-              <v-icon icon="mdi-cart" color="grey" />
-            </NuxtLink>
+          <v-btn style="font-size: larger" v-bind:disabled="authenticated == 0">
+              <NuxtLink to="/cart" class="btn text-decoration-none">
+                <v-icon icon="mdi-cart" color="grey" />
+              </NuxtLink>
+            </v-btn>
           </v-toolbar-title>
         </v-col>
         <v-col cols="3" md="3" lg="3">
           <v-toolbar-title class="nav-icon">
-            <NuxtLink to="/" class="btn text-decoration-none">
-              <v-icon icon="mdi-heart" color="grey" />
-            </NuxtLink>
+            <v-btn
+              style="font-size: larger"
+              v-bind:disabled="authenticated == 0"
+            >
+              <NuxtLink to="/" class="text-decoration-none">
+                <v-icon icon="mdi-heart" color="grey" />
+              </NuxtLink>
+            </v-btn>
           </v-toolbar-title>
         </v-col>
         <v-col cols="6" md="6" lg="6" v-if="authenticated">
           <v-toolbar-title class="nav-icon user-name text-break">
-              <v-menu>
-                <template v-slot:activator="{ props }">
-                  Hi {{ user.firstName }}
+            <v-menu>
+              <template v-slot:activator="{ props }">
+                Hi {{ user.firstName }}
 
-                    <v-icon icon="mdi-chevron-down" v-bind="props"  />
-                </template>
-                <v-list>
-
-                  <v-list-item
-                  >
-                    <v-list-item-title>
-                      <NuxtLink to="/account" style="text-decoration:none;color:#212121;" >
+                <v-icon icon="mdi-chevron-down" v-bind="props" />
+              </template>
+              <v-list>
+                <v-list-item>
+                  <v-list-item-title>
+                    <NuxtLink
+                      to="/account"
+                      style="text-decoration: none; color: #212121"
+                    >
                       Profile
-                    </NuxtLink></v-list-item-title>
-                  </v-list-item>
-                  <v-list-item
+                    </NuxtLink></v-list-item-title
                   >
-                    <v-list-item-title @click.prevent="logout" style="cursor:pointer">Logout</v-list-item-title>
-                  </v-list-item>
-                </v-list>
-              </v-menu>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title
+                    @click.prevent="logout"
+                    style="cursor: pointer"
+                    >Logout</v-list-item-title
+                  >
+                </v-list-item>
+              </v-list>
+            </v-menu>
           </v-toolbar-title>
         </v-col>
         <v-col cols="6" md="6" lg="6" v-if="!authenticated">

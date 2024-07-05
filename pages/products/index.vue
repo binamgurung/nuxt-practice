@@ -9,13 +9,27 @@
 <script setup>
 import axios from "axios";
 import { ref, onMounted } from "vue";
+import { useCategoryStore } from "~/store/category";
 
 const products = ref([]);
+const route = useRoute();
+const categoryStore = useCategoryStore();
+
+
+
 
 onMounted(async () => {
   try {
-    const response = await axios.get("https://dummyjson.com/products");
-    products.value = response.data.products;
+    if(!route.query.category)
+    {
+      const response = await axios.get("https://dummyjson.com/products");
+      products.value = response.data.products;
+    }
+    else {
+      const category = route.query.category;
+      const response = await categoryStore.fetchCategoryProducts(category);
+      products.value = response.products;
+    }
   } catch (error) {
     console.error("Error fetching products:", error);
   }
