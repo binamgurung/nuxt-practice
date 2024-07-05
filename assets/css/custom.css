@@ -1,6 +1,19 @@
 .router-link-exact-active {
   color: #43b883;
 }
+.v-toolbar__content {
+  height: 85px !important;
+}
+.v-toolbar-title__placeholder {
+  white-space: initial !important;
+}
+.v-navigation-drawer__content {
+  padding-top: 15px !important;
+}
+.v-list-item-title {
+  height: 20px;
+  width: 100px;
+}
 .search-bar {
   margin-top: 20px;
   padding: 10px;
@@ -25,9 +38,6 @@
 .search-bar input::placeholder {
   color: gray;
 }
-.nav-icon {
-  max-width: 95px;
-}
 
 .services,
 .contact-us {
@@ -38,7 +48,6 @@
   background-color: #d3d3d3a6;
   border-radius: 5px;
 }
-
 
 html,
 body,

@@ -19,7 +19,6 @@ onMounted(async () => {
     const userId = userStore.user.id;
     let url = "https://dummyjson.com/carts/user/" + userId;
     const response = await axios.get(url);
-    console.log(response);
   } catch (error) {
     console.error("Error fetching products:", error);
   }

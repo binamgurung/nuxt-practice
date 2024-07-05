@@ -9,6 +9,10 @@ interface UserDetails {
 
 interface UserResponse {
   token: string;
+  id: string;
+  firstName: string;
+  lastName: string;
+  image: string;
 }
 
 export const useAuthStore = defineStore("auth", {
@@ -31,8 +35,10 @@ export const useAuthStore = defineStore("auth", {
             headers: { "Content-Type": "application/json" },
           }
         );
-        const token = useCookie("token");
+        const token = useCookie("token", { maxAge: 60 * 60 * 24 * 7 });
+        const user = useCookie("user_details", { maxAge: 60 * 60 * 24 * 7 });
         token.value = data.token; // set token to cookie
+        user.value = JSON.stringify(data);
         this.authenticated = true; // set authenticated state value to true
       } catch (error) {
         console.error("Authentication failed:", error);
@@ -44,9 +50,6 @@ export const useAuthStore = defineStore("auth", {
       const token = useCookie("token");
       this.authenticated = false; // set authenticated state value to false
       token.value = null;
-    },
-    userDetails(user: any) {
-      this.user = useCookie("user");
     },
   },
 });

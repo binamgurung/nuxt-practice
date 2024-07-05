@@ -3,12 +3,17 @@
     <!-- Application Bar with Search Bar -->
     <v-app-bar app color="secondary">
       <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer" />
-      <v-toolbar-title class="app-name">{{
-        $config.public.app_name
-      }}</v-toolbar-title>
+      <v-toolbar-title class="app-name">
+        <NuxtLink to="/" style="text-decoration: none; cursor: pointer;color:#FFFFFF;">
+          {{
+            $config.public.app_name
+          }}
+        </NuxtLink>
+
+      </v-toolbar-title>
 
       <!-- Navigation List -->
-      <v-row class="d-none d-lg-flex d-md-flex text-center">
+      <!-- <v-row class="d-none d-lg-flex d-md-flex text-center">
         <v-col
           cols="4"
           col-md="4"
@@ -31,7 +36,7 @@
             </v-toolbar-title>
           </v-hover>
         </v-col>
-      </v-row>
+      </v-row> -->
       <!-- Search Bar -->
       <v-toolbar-title>
         <v-row>
@@ -48,37 +53,49 @@
       </v-toolbar-title>
       <!-- Navigation Icons -->
       <v-row
-        class="d-none d-lg-flex d-md-flex text-center"
-        style="margin-top: -12px; width: 10px"
+        class="d-none d-lg-flex d-md-flex"
+        style="width: 20px; text-align: center"
       >
-        <v-col cols="3">
+        <v-col cols="3" md="3" lg="3">
           <v-toolbar-title class="nav-icon">
             <NuxtLink to="/cart" class="btn text-decoration-none">
               <v-icon icon="mdi-cart" color="grey" />
             </NuxtLink>
           </v-toolbar-title>
         </v-col>
-        <v-col cols="3">
+        <v-col cols="3" md="3" lg="3">
           <v-toolbar-title class="nav-icon">
             <NuxtLink to="/" class="btn text-decoration-none">
               <v-icon icon="mdi-heart" color="grey" />
             </NuxtLink>
           </v-toolbar-title>
         </v-col>
-        <v-col cols="3" v-if="authenticated">
-          <v-toolbar-title class="nav-icon">
-            <v-img alt="product" style="cursor: pointer; border-radius: 50%" />
+        <v-col cols="6" md="6" lg="6" v-if="authenticated">
+          <v-toolbar-title class="nav-icon user-name text-break">
+              <v-menu>
+                <template v-slot:activator="{ props }">
+                  Hi {{ user.firstName }}
+
+                    <v-icon icon="mdi-chevron-down" v-bind="props"  />
+                </template>
+                <v-list>
+
+                  <v-list-item
+                  >
+                    <v-list-item-title>
+                      <NuxtLink to="/account" style="text-decoration:none;color:#212121;" >
+                      Profile
+                    </NuxtLink></v-list-item-title>
+                  </v-list-item>
+                  <v-list-item
+                  >
+                    <v-list-item-title @click.prevent="logout" style="cursor:pointer">Logout</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
           </v-toolbar-title>
         </v-col>
-        <v-col cols="3" v-if="authenticated">
-          <v-toolbar-title class="nav-icon">
-            <button @click.prevent="logout" class="btn text-decoration-none">
-              <v-icon icon="mdi-logout" color="grey" style="cursor: pointer">
-              </v-icon>
-            </button>
-          </v-toolbar-title>
-        </v-col>
-        <v-col cols="3" v-if="!authenticated">
+        <v-col cols="6" md="6" lg="6" v-if="!authenticated">
           <v-toolbar-title class="nav-icon">
             <NuxtLink to="/login" class="btn text-decoration-none">
               <v-icon icon="mdi-login" color="grey" />
@@ -210,7 +227,7 @@ const router = useRouter();
 const { logUserOut } = useAuthStore();
 const { authenticated } = storeToRefs(useAuthStore());
 const EcomUser = useUserStore();
-console.log(EcomUser.getUserDetails());
+const user = EcomUser.getUserDetails();
 
 // Methods
 const navigate = (link) => {

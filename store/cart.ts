@@ -11,7 +11,6 @@ export const useCartStore = defineStore("cart", {
     async fetchCart() {
       try {
         const userStore = useUserStore();
-        console.log(1);
         if (!userStore.user) {
           await userStore.fetchUser();
         }

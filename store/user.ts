@@ -5,7 +5,7 @@ import { useRouter } from "vue-router";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
-    user: useCookie("user").value || null,
+    user: useCookie("user_details").value || null,
     token: useCookie("token").value || null,
   }),
   actions: {
@@ -30,11 +30,7 @@ export const useUserStore = defineStore("user", {
       this.token = token;
     },
     getUserDetails() {
-      console.log(this.user);
-      if (this.user) {
-        return this.user;
-      }
-      return null;
+      return this.user;
     },
   },
 });
