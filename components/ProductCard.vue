@@ -46,11 +46,11 @@ const userStore = useUserStore();
 const { product } = defineProps(["product"]);
 
 const addToCart = async () => {
-  if (!userStore.user) {
-    await userStore.fetchUser();
-  }
-  const userId = userStore.user.id; // Get the user ID
   try {
+    if (!userStore.user) {
+      await userStore.fetchUser();
+    }
+    const userId = userStore.user.id;
     const { data } = await axios.post(
       "https://dummyjson.com/carts/add",
       {
@@ -63,9 +63,7 @@ const addToCart = async () => {
         },
       }
     );
-  } catch (error) {
-    console.error("Error adding to cart:", error);
-  }
+  } catch (error) {}
 };
 </script>
 

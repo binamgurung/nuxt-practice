@@ -1,6 +1,7 @@
 // stores/user.js
 import { defineStore } from "pinia";
 import axios from "axios";
+import { useRouter } from "vue-router";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
@@ -10,6 +11,9 @@ export const useUserStore = defineStore("user", {
   actions: {
     async fetchUser() {
       try {
+        if (this.token == null) {
+          return navigateTo("/login");
+        }
         const response = await axios.get("https://dummyjson.com/user/me", {
           headers: {
             Authorization: `Bearer ${this.token}`,

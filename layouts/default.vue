@@ -40,7 +40,7 @@
       >
         <v-col cols="3">
           <v-toolbar-title class="nav-icon">
-            <NuxtLink to="/" class="btn text-decoration-none">
+            <NuxtLink to="/cart" class="btn text-decoration-none">
               <v-icon icon="mdi-cart" color="grey" />
             </NuxtLink>
           </v-toolbar-title>

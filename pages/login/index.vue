@@ -1,6 +1,6 @@
 <template>
   <div class="parent-sign-up">
-    <v-card class="child-sign-up mt-8" title="User Login">
+    <v-card class="child-sign-up mt-8 pt-4">
       <v-card-text>
         <v-row class="px-6">
           <v-col cols="12" md="12" lg="12">
