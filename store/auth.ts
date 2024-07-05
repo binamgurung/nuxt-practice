@@ -2,14 +2,13 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import { useCookie } from "nuxt/app"; // Adjust the import path if needed
 
-interface UserPayloadInterface {
+interface UserDetails {
   username: string;
   password: string;
 }
 
 interface UserResponse {
   token: string;
-  // Add other user properties if needed
 }
 
 export const useAuthStore = defineStore("auth", {
@@ -18,7 +17,7 @@ export const useAuthStore = defineStore("auth", {
     loading: false,
   }),
   actions: {
-    async authenticateUser({ username, password }: UserPayloadInterface) {
+    async authenticateUser({ username, password }: UserDetails) {
       this.loading = true;
       try {
         const { data } = await axios.post<UserResponse>(
@@ -45,6 +44,9 @@ export const useAuthStore = defineStore("auth", {
       const token = useCookie("token");
       this.authenticated = false; // set authenticated state value to false
       token.value = null;
+    },
+    userDetails(user: any) {
+      this.user = useCookie("user");
     },
   },
 });

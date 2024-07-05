@@ -32,7 +32,20 @@
           </v-hover>
         </v-col>
       </v-row>
-
+      <!-- Search Bar -->
+      <v-toolbar-title>
+        <v-row>
+          <v-col cols="12">
+            <v-text-field
+              label="Search"
+              prepend-icon="mdi-magnify"
+              variant="outlined"
+              class="search-bar py-20"
+              clearable
+            />
+          </v-col>
+        </v-row>
+      </v-toolbar-title>
       <!-- Navigation Icons -->
       <v-row
         class="d-none d-lg-flex d-md-flex text-center"
@@ -54,9 +67,7 @@
         </v-col>
         <v-col cols="3" v-if="authenticated">
           <v-toolbar-title class="nav-icon">
-            <NuxtLink to="/account" class="btn text-decoration-none">
-              <v-icon icon="mdi-home-account" color="grey" />
-            </NuxtLink>
+            <v-img alt="product" style="cursor: pointer; border-radius: 50%" />
           </v-toolbar-title>
         </v-col>
         <v-col cols="3" v-if="authenticated">
@@ -75,23 +86,7 @@
           </v-toolbar-title>
         </v-col>
       </v-row>
-
-      <!-- Search Bar -->
-      <v-toolbar-title>
-        <v-row>
-          <v-col cols="12">
-            <v-text-field
-              label="Search"
-              prepend-icon="mdi-magnify"
-              variant="outlined"
-              class="search-bar py-20"
-              clearable
-            />
-          </v-col>
-        </v-row>
-      </v-toolbar-title>
     </v-app-bar>
-
     <!-- Navigation Drawer -->
     <v-navigation-drawer v-model="drawer" app temporary>
       <v-list dense>
@@ -112,6 +107,7 @@
     <v-main>
       <v-container fluid class="pa-10">
         <slot />
+        <NuxtSnackbar />
       </v-container>
     </v-main>
 
@@ -187,6 +183,8 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "~/store/auth";
+import { useUserStore } from "~/store/user";
+import { onMounted } from "vue";
 
 // Local state
 const drawer = ref(false);
@@ -211,6 +209,8 @@ const services = ref([
 const router = useRouter();
 const { logUserOut } = useAuthStore();
 const { authenticated } = storeToRefs(useAuthStore());
+const EcomUser = useUserStore();
+console.log(EcomUser.getUserDetails());
 
 // Methods
 const navigate = (link) => {

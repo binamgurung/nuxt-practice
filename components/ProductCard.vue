@@ -44,6 +44,8 @@ import axios from "axios";
 
 const userStore = useUserStore();
 const { product } = defineProps(["product"]);
+const snackbar = useSnackbar();
+
 
 const addToCart = async () => {
   try {
@@ -63,7 +65,19 @@ const addToCart = async () => {
         },
       }
     );
-  } catch (error) {}
+    if(data.id)
+    {
+      snackbar.add({
+        type: 'success',
+        text: 'Added to Cart Successfully'
+      });
+    }
+  } catch (error) {
+    snackbar.add({
+      type: 'error',
+      text: error.message,
+    });
+    }
 };
 </script>
 

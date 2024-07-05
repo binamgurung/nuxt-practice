@@ -1,11 +1,11 @@
-// stores/user.js
+// stores/user.ts
 import { defineStore } from "pinia";
 import axios from "axios";
 import { useRouter } from "vue-router";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
-    user: null,
+    user: useCookie("user").value || null,
     token: useCookie("token").value || null,
   }),
   actions: {
@@ -19,14 +19,22 @@ export const useUserStore = defineStore("user", {
             Authorization: `Bearer ${this.token}`,
           },
         });
-        const token = useCookie("token");
+        // const token = useCookie("token");
         this.user = response.data;
+        return response.data;
       } catch (error) {
         console.error("Error fetching user:", error);
       }
     },
     setToken(token: any) {
       this.token = token;
+    },
+    getUserDetails() {
+      console.log(this.user);
+      if (this.user) {
+        return this.user;
+      }
+      return null;
     },
   },
 });

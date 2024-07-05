@@ -6,6 +6,7 @@ export default defineNuxtConfig({
   },
   modules: [
     "@pinia/nuxt",
+    'nuxt-snackbar',
     (_options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) => {
         // @ts-expect-error
@@ -14,6 +15,10 @@ export default defineNuxtConfig({
     },
     //...
   ],
+  snackbar: {
+    top: true,
+    right: true,
+  },
   imports: {
     dirs: ["stores"], // Automatically import stores from the stores directory
   },
