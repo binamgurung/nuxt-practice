@@ -1,0 +1,63 @@
+.router-link-exact-active {
+  color: #43b883;
+}
+.v-toolbar__content {
+  height: 85px !important;
+}
+.v-toolbar-title__placeholder {
+  white-space: initial !important;
+}
+.v-navigation-drawer__content {
+  padding-top: 15px !important;
+}
+.v-list-item-title {
+  height: 20px;
+  width: 100px;
+}
+.search-bar {
+  margin-top: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
+.custom-footer {
+  flex: none !important;
+}
+.parent-sign-up {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.child-sign-up {
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  width: 50%;
+  height: 80%;
+}
+/* Change the placeholder text color */
+.search-bar input::placeholder {
+  color: gray;
+}
+
+.services,
+.contact-us {
+  cursor: pointer;
+}
+
+.hovering-title {
+  background-color: #d3d3d3a6;
+  border-radius: 5px;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}
+/* Responsiveness of the nav name */
+@media only screen and (max-width: 960px) {
+  .app-name {
+    max-width: 80px;
+  }
+}
