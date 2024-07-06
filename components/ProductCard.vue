@@ -27,6 +27,9 @@
           <v-icon icon="mdi-heart" end></v-icon>
         </v-btn>
         <h4 class="font-bold ext-gray-500 m-4 truncate">{{ product.title }}</h4>
+        <h3 class="font-bold ext-gray-500 m-4 truncate">
+          $ {{ product.price }}
+        </h3>
         <NuxtLink
           class="text-decoration-none text-secondary"
           :to="`products/${product.id}`"
@@ -46,7 +49,6 @@ const userStore = useUserStore();
 const { product } = defineProps(["product"]);
 const snackbar = useSnackbar();
 
-
 const addToCart = async () => {
   try {
     if (!userStore.user) {
@@ -65,19 +67,18 @@ const addToCart = async () => {
         },
       }
     );
-    if(data.id)
-    {
+    if (data.id) {
       snackbar.add({
-        type: 'success',
-        text: 'Added to Cart Successfully'
+        type: "success",
+        text: "Added to Cart Successfully",
       });
     }
   } catch (error) {
     snackbar.add({
-      type: 'error',
+      type: "error",
       text: error.message,
     });
-    }
+  }
 };
 </script>
 
