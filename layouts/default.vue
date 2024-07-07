@@ -121,7 +121,7 @@
             </v-menu>
           </v-toolbar-title>
         </v-col>
-        <v-col cols="6" md="6" lg="6" v-if="!authenticated">
+        <v-col cols="3" md="3" lg="3" v-if="!authenticated">
           <v-toolbar-title class="nav-icon">
             <NuxtLink to="/login" class="btn text-decoration-none">
               <v-icon icon="mdi-login" color="grey" />
