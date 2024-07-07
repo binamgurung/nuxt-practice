@@ -36,13 +36,15 @@
 import axios from "axios";
 import { ref, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
-import { useCategoryStore } from "~/store/category";
+import { useProductsByCategoryStore } from "~/store/productsByCategory";
+import { useProductsStore } from "~/store/products";
 
 const products = ref([]);
 const filteredProducts = ref([]);
 const priceRange = ref([0, 100]);
 const route = useRoute();
-const categoryStore = useCategoryStore();
+const categoryStore = useProductsByCategoryStore();
+const productsStore = useProductsStore();
 
 const filterProducts = () => {
   filteredProducts.value = products.value.filter((product) => {
@@ -56,8 +58,8 @@ const filterProducts = () => {
 onMounted(async () => {
   try {
     if (!route.query.category) {
-      const response = await axios.get("https://dummyjson.com/products");
-      products.value = response.data.products;
+      const response = await productsStore.fetchProducts();
+      products.value = response.products;
     } else {
       const category = route.query.category;
       const response = await categoryStore.fetchCategoryProducts(category);

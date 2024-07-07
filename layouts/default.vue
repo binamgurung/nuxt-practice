@@ -58,7 +58,10 @@
       >
         <v-col cols="3" md="3" lg="3">
           <v-toolbar-title class="nav-icon">
-          <v-btn style="font-size: larger" v-bind:disabled="authenticated == 0">
+            <v-btn
+              style="font-size: larger"
+              v-bind:disabled="authenticated == 0"
+            >
               <NuxtLink to="/cart" class="btn text-decoration-none">
                 <v-icon icon="mdi-cart" color="grey" />
               </NuxtLink>
@@ -77,11 +80,22 @@
             </v-btn>
           </v-toolbar-title>
         </v-col>
-        <v-col cols="6" md="6" lg="6" v-if="authenticated">
+        <v-col cols="3" md="3" lg="3">
+          <v-toolbar-title class="nav-icon">
+            <v-btn style="font-size: larger">
+              <v-icon
+                icon="mdi-basket"
+                color="grey"
+                @click="navigate('/products')"
+              />
+            </v-btn>
+          </v-toolbar-title>
+        </v-col>
+        <v-col cols="3" md="3" lg="3" v-if="authenticated">
           <v-toolbar-title class="nav-icon user-name text-break">
             <v-menu>
               <template v-slot:activator="{ props }">
-                Hi {{ user.firstName }}
+                {{ user.firstName }}
 
                 <v-icon icon="mdi-chevron-down" v-bind="props" />
               </template>
