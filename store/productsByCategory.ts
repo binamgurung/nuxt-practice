@@ -1,8 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import { useRouter } from "vue-router";
 
-export const useProductsByCategoryStore = defineStore("category", {
+export const useProductsByCategoryStore = defineStore("productsByCategory", {
   state: () => ({
     user: useCookie("user_details").value || null,
     token: useCookie("token").value || null,
