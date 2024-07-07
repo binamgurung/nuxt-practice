@@ -48,8 +48,10 @@ export const useAuthStore = defineStore("auth", {
     },
     logUserOut() {
       const token = useCookie("token");
+      const user_details = useCookie("user_details");
       this.authenticated = false; // set authenticated state value to false
       token.value = null;
+      user_details.value = null;
     },
   },
 });
