@@ -52,7 +52,7 @@ const router = useRouter();
 const login = async () => {
   await authenticateUser(user.value);
   if (authenticated) {
-    router.push("/");
+    router.push("/").catch(() => {});
   }
 };
 
