@@ -252,8 +252,9 @@ const services = ref([
 const router = useRouter();
 const { logUserOut } = useAuthStore();
 const { authenticated } = storeToRefs(useAuthStore());
-const user = ref([]);
+// const user = ref([]);
 const userStore = useUserStore();
+const { user } = storeToRefs(userStore);
 
 onMounted(async () => {
   try {
@@ -263,6 +264,11 @@ onMounted(async () => {
     console.error("Error fetching user:", error);
   }
 });
+
+// watch(userStore.user, (newValue) => {
+//   user.value = newValue;
+//   console.log(newValue);
+// });
 
 // Methods
 const navigate = (link) => {

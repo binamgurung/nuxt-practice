@@ -29,6 +29,9 @@ export const useUserStore = defineStore("user", {
     setToken(token: any) {
       this.token = token;
     },
+    setUser(user: any) {
+      this.user = user;
+    },
     getUserDetails() {
       console.log("user store");
       return this.user;
