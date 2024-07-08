@@ -30,6 +30,7 @@ export const useUserStore = defineStore("user", {
       this.token = token;
     },
     getUserDetails() {
+      console.log("user store");
       return this.user;
     },
   },

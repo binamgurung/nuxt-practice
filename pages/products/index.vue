@@ -36,8 +36,8 @@
 import axios from "axios";
 import { ref, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
-import { useProductsByCategoryStore } from "~/store/productsByCategory";
-import { useProductsStore } from "~/store/products";
+import { useProductsByCategoryStore } from "~/stores/productsByCategory";
+import { useProductsStore } from "~/stores/products";
 
 const products = ref([]);
 const filteredProducts = ref([]);

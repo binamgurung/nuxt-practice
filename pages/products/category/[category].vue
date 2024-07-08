@@ -36,7 +36,7 @@
 import axios from "axios";
 import { ref, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
-import { useProductsByCategoryStore } from "~/store/productsByCategory";
+import { useProductsByCategoryStore } from "~/stores/productsByCategory";
 
 const { category } = useRoute().params;
 const products = ref([]);

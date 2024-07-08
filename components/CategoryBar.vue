@@ -50,7 +50,7 @@
 </template>
 
 <script setup>
-import { useCategoryStore } from "~/store/category.ts";
+import { useCategoryStore } from "~/stores/category";
 import { ref, onMounted } from "vue";
 
 const categoryStore = useCategoryStore();
@@ -112,7 +112,7 @@ const dummyImages = {
     "https://img.freepik.com/free-photo/various-pantry-products-ingredients_23-2148796319.jpg?t=st=1720372358~exp=1720375958~hmac=22f3304762182a71692ae8469e24fd1d4d8d54ffa005e9690209c0f50992bf31&w=1800",
   laptops:
     "https://img.freepik.com/free-photo/still-life-books-versus-technology_23-2150062920.jpg?t=st=1720372412~exp=1720376012~hmac=3d9a9d9ca4bea918b4825ac1f2a08e833eeff24b2b22b8856afbfbf7ced8a521&w=1800",
-  "mens-watches":
+  "mens-shirts":
     "https://img.freepik.com/premium-photo/close-up-luxury-man-wrist-watches-placed-tree-trunk_85778-240.jpg?w=826",
 };
 data: () => ({

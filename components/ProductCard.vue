@@ -42,7 +42,7 @@
 </template>
 
 <script setup>
-import { useUserStore } from "~/store/user";
+import { useUserStore } from "~/stores/user";
 import axios from "axios";
 
 const userStore = useUserStore();

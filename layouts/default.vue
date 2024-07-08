@@ -225,8 +225,8 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
-import { useAuthStore } from "~/store/auth";
-import { useUserStore } from "~/store/user";
+import { useAuthStore } from "~/stores/auth";
+import { useUserStore } from "~/stores/user";
 import { onMounted } from "vue";
 
 // Local state
@@ -252,8 +252,17 @@ const services = ref([
 const router = useRouter();
 const { logUserOut } = useAuthStore();
 const { authenticated } = storeToRefs(useAuthStore());
-const EcomUser = useUserStore();
-const user = EcomUser.getUserDetails();
+const user = ref([]);
+const userStore = useUserStore();
+
+onMounted(async () => {
+  try {
+    const response = await userStore.fetchUser();
+    user.value = response;
+  } catch (error) {
+    console.error("Error fetching user:", error);
+  }
+});
 
 // Methods
 const navigate = (link) => {

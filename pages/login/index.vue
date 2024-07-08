@@ -34,11 +34,8 @@
 </template>
 
 <script setup>
-definePageMeta({
-  middleware: "auth", // this should match the name of the file inside the middleware directory
-});
 import { storeToRefs } from "pinia";
-import { useAuthStore } from "~/store/auth";
+import { useAuthStore } from "~/stores/auth";
 
 const { authenticateUser } = useAuthStore(); // use auth store
 
@@ -54,7 +51,14 @@ const router = useRouter();
 
 const login = async () => {
   await authenticateUser(user.value);
+  if (authenticated) {
+    router.push("/");
+  }
 };
+
+definePageMeta({
+  middleware: "auth", // this should match the name of the file inside the middleware directory
+});
 </script>
 
 <style lang="scss" scoped></style>

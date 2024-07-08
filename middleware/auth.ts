@@ -1,10 +1,9 @@
 import { storeToRefs } from "pinia";
-import { useAuthStore } from "~/store/auth";
+import { useAuthStore } from "~/stores/auth";
 
 export default defineNuxtRouteMiddleware((to) => {
   const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive
   const token = useCookie("token"); // get token from cookies
-
 
   // if token exists and url is /login redirect to homepage
   if (token.value && to?.name === "login") {

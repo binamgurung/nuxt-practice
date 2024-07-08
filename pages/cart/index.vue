@@ -5,7 +5,7 @@
 <script setup>
 import axios from "axios";
 import { ref, onMounted } from "vue";
-import { useUserStore } from "~/store/user";
+import { useUserStore } from "~/stores/user";
 
 definePageMeta({
   middleware: "auth", // this should match the name of the file inside the middleware directory
