@@ -7,16 +7,21 @@
             <v-text-field
               label="Enter User Name"
               type="text"
-              v-model="userName"
-              required
+              v-model="user.userName"
             ></v-text-field>
+            <span v-for="error in v$.userName.$errors" style="color: red">
+              {{ error.$message }}</span
+            >
           </v-col>
           <v-col cols="12" md="12" lg="12">
             <v-text-field
               label="Enter Password"
               type="password"
-              v-model="password"
+              v-model="user.password"
             ></v-text-field>
+            <span v-for="error in v$.password.$errors" style="color: red">
+              {{ error.$message }}</span
+            >
           </v-col>
         </v-row>
       </v-card-text>
@@ -36,23 +41,39 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "~/stores/auth";
+import { required,helpers } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 
 const { authenticateUser } = useAuthStore(); // use auth store
 
 const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive
-const userName = ref("");
-const password = ref("");
 
-const user = ref({
-  username: "emilys",
-  password: "emilyspass",
+const user = reactive({
+  userName: "",
+  password: "",
 });
+
+const rules = computed(() => {
+  return {
+    userName: {
+      required: helpers.withMessage("The email field is required", required),
+    },
+    password: {
+      required: helpers.withMessage("The password field is required", required),
+    },
+  };
+});
+const v$ = useVuelidate(rules, user);
+
 const router = useRouter();
 
 const login = async () => {
-  await authenticateUser(user.value);
-  if (authenticated) {
-    router.push("/").catch(() => {});
+  v$.value.$validate();
+  if (!v$.value.$error) {
+    await authenticateUser(user.value);
+    if (authenticated) {
+      router.push("/").catch(() => {});
+    }
   }
 };
 
