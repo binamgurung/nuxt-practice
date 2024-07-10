@@ -70,16 +70,12 @@ const router = useRouter();
 const login = async () => {
   v$.value.$validate();
   if (!v$.value.$error) {
-    await authenticateUser(user.value);
+    await authenticateUser(user);
     if (authenticated) {
       router.push("/").catch(() => {});
     }
   }
 };
-
-definePageMeta({
-  middleware: "auth", // this should match the name of the file inside the middleware directory
-});
 </script>
 
 <style lang="scss" scoped></style>
