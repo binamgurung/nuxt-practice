@@ -1,22 +1,62 @@
 <template>
   <v-row>
     <v-col cols="12" md="4" lg="3">
-      <h3>Price</h3>
-      <v-range-slider
-        v-model="priceRange"
-        :min="0"
-        :max="100"
-        :step="5"
-        class="my-4"
-        @input="filterProducts"
+      <NuxtLink
+        to="/"
+        style="text-decoration: none; cursor: pointer; color: grey"
       >
-        <template v-slot:append>
-          <br />
-          <div>${{ priceRange[0] }} - ${{ priceRange[1] }}</div>
-        </template>
-      </v-range-slider>
+        Home
+      </NuxtLink>
+      <span style="color: grey"> > {{ route.meta.title }}</span>
+      <h1 class="py-2">{{ route.meta.title }}</h1>
     </v-col>
-    <v-col cols="12" md="8" lg="9">
+    <v-col cols="12" md="8" lg="9"> </v-col>
+  </v-row>
+  <v-row>
+    <v-col
+      cols="12"
+      md="12"
+      lg="12"
+      v-if="isFilterVisible"
+      id="filterSection"
+      class="d-inline-block"
+    >
+      <div class="d-inline-block py-2" style="width: 50%">
+        <v-btn variant="outlined" style="opacity: 50%" @click="hideFilter"
+          >Hide Filter</v-btn
+        >
+        <span style="float: right">{{ total_products }} results</span>
+      </div>
+      <div style="width: 50%">
+        <v-range-slider
+          v-model="priceRange"
+          :min="0"
+          :max="100"
+          :step="5"
+          class="my-4"
+          @input="filterProducts"
+        >
+          <template v-slot:prepend>
+            <h3>Price</h3>
+          </template>
+          <template v-slot:append>
+            <br />
+            <div>${{ priceRange[0] }} - ${{ priceRange[1] }}</div>
+          </template>
+        </v-range-slider>
+      </div>
+    </v-col>
+    <v-col cols="12" md="8" lg="12">
+      <div
+        class="d-inline-block py-4"
+        style="width: 50%"
+        v-if="!isFilterVisible"
+      >
+        <v-btn variant="outlined" style="opacity: 50%" @click="showFilter"
+          >Show Filter</v-btn
+        >
+        <span class="mx-2">{{ total_products }} results</span>
+      </div>
       <v-row>
         <v-col
           cols="12"
@@ -36,13 +76,31 @@
 import axios from "axios";
 import { ref, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
-import { useCategoryStore } from "~/store/category";
+import { useProductsByCategoryStore } from "~/stores/productsByCategory";
+import { useProductsStore } from "~/stores/products";
+
+useHead({
+  title: "Products",
+});
+definePageMeta({
+  title: "Products",
+});
+const isFilterVisible = ref(true);
+
+const hideFilter = () => {
+  isFilterVisible.value = false;
+};
+const showFilter = () => {
+  isFilterVisible.value = true;
+};
 
 const products = ref([]);
+const total_products = ref();
 const filteredProducts = ref([]);
 const priceRange = ref([0, 100]);
 const route = useRoute();
-const categoryStore = useCategoryStore();
+const categoryStore = useProductsByCategoryStore();
+const productsStore = useProductsStore();
 
 const filterProducts = () => {
   filteredProducts.value = products.value.filter((product) => {
@@ -56,12 +114,15 @@ const filterProducts = () => {
 onMounted(async () => {
   try {
     if (!route.query.category) {
-      const response = await axios.get("https://dummyjson.com/products");
-      products.value = response.data.products;
+      const response = await productsStore.fetchProducts();
+      console.log(response);
+      products.value = response.products;
+      total_products.value = response.total;
     } else {
       const category = route.query.category;
       const response = await categoryStore.fetchCategoryProducts(category);
       products.value = response.products;
+      total_products.value = response.total;
     }
     filterProducts(); // Initial filtering
   } catch (error) {

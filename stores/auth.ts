@@ -29,7 +29,6 @@ export const useAuthStore = defineStore("auth", {
           {
             username,
             password,
-            expiresInMins: 30,
           },
           {
             headers: { "Content-Type": "application/json" },
@@ -39,6 +38,9 @@ export const useAuthStore = defineStore("auth", {
         const user = useCookie("user_details", { maxAge: 60 * 60 * 24 * 7 });
         token.value = data.token; // set token to cookie
         user.value = JSON.stringify(data);
+        const userStore = useUserStore();
+        console.log(data);  
+        userStore.setUser(data);
         this.authenticated = true; // set authenticated state value to true
       } catch (error) {
         console.error("Authentication failed:", error);
@@ -48,8 +50,10 @@ export const useAuthStore = defineStore("auth", {
     },
     logUserOut() {
       const token = useCookie("token");
+      const user_details = useCookie("user_details");
       this.authenticated = false; // set authenticated state value to false
       token.value = null;
+      user_details.value = null;
     },
   },
 });

@@ -16,10 +16,12 @@
               class="d-flex transition-fast-in-fast-out bg-black opacity-50 v-card--reveal text-h2"
               style="height: 100%"
             >
-              <NuxtLink :to="{ path: '/products', query: { category: 'beauty' } }">
+              <NuxtLink
+                :to="{ path: '/products', query: { category: 'beauty' } }"
+              >
                 <v-btn
-                    class="btn-primary position-absolute"
-                    style="right: 300px; top: 500px; color: black"
+                  class="btn-primary position-absolute"
+                  style="right: 300px; top: 500px; color: black"
                 >
                   Shop Now
                 </v-btn>
@@ -44,25 +46,29 @@
               class="d-flex transition-fast-in-fast-out bg-black opacity-50 v-card--reveal text-h2"
               style="height: 100%"
             >
-              <NuxtLink :to="{ path: '/products', query: { category: 'home-decoration' } }">
-              <v-btn
-                class="btn-primary position-absolute"
-                style="right: 300px; top: 500px; color: black"
+              <NuxtLink
+                :to="{
+                  path: '/products',
+                  query: { category: 'home-decoration' },
+                }"
               >
-                Shop Now
-              </v-btn>
+                <v-btn
+                  class="btn-primary position-absolute"
+                  style="right: 300px; top: 500px; color: black"
+                >
+                  Shop Now
+                </v-btn>
               </NuxtLink>
-
             </div>
           </v-expand-transition>
         </v-img>
       </v-col>
     </v-hover>
+    <v-divider></v-divider>
   </v-row>
+  <CategoryBar />
 </template>
 
-<script setup>
-
-</script>
+<script setup></script>
 
 <style scoped></style>
