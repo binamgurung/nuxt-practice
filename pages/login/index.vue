@@ -7,9 +7,9 @@
             <v-text-field
               label="Enter User Name"
               type="text"
-              v-model="user.userName"
+              v-model="user.username"
             ></v-text-field>
-            <span v-for="error in v$.userName.$errors" style="color: red">
+            <span v-for="error in v$.username.$errors" style="color: red">
               {{ error.$message }}</span
             >
           </v-col>
@@ -41,7 +41,7 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "~/stores/auth";
-import { required,helpers } from "@vuelidate/validators";
+import { required, helpers } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
 
 const { authenticateUser } = useAuthStore(); // use auth store
@@ -49,13 +49,13 @@ const { authenticateUser } = useAuthStore(); // use auth store
 const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive
 
 const user = reactive({
-  userName: "",
+  username: "",
   password: "",
 });
 
 const rules = computed(() => {
   return {
-    userName: {
+    username: {
       required: helpers.withMessage("The email field is required", required),
     },
     password: {
