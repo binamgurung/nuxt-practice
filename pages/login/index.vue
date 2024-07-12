@@ -7,6 +7,7 @@
             <v-text-field
               label="Enter User Name"
               type="text"
+              variant="outlined"
               v-model="user.username"
             ></v-text-field>
             <span v-for="error in v$.username.$errors" style="color: red">
@@ -18,6 +19,7 @@
               label="Enter Password"
               type="password"
               v-model="user.password"
+              variant="outlined"
             ></v-text-field>
             <span v-for="error in v$.password.$errors" style="color: red">
               {{ error.$message }}</span

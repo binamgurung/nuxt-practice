@@ -36,6 +36,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       app_name: process.env.APP_NAME,
+      currency: process.env.CURRENCY,
     },
   },
   app: {

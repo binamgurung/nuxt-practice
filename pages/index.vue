@@ -67,8 +67,40 @@
     <v-divider></v-divider>
   </v-row>
   <CategoryBar />
+  <v-divider></v-divider>
+  <ProductTable
+    :header="header"
+    :data="products"
+    :table-loading="loading_products"
+    :search="search_keyword"
+    class="mt-8 px-6"
+  />
 </template>
 
-<script setup></script>
+<script setup>
+import { useProductsStore } from "~/stores/products";
+
+const productStore = useProductsStore();
+const { products, loading_products } = storeToRefs(productStore);
+const getData = async () => {
+  await productStore.fetchProducts();
+};
+let initialHeader = [
+  {
+    title: "Product ",
+    value: "title",
+    align: "start",
+    sortable: true,
+  },
+  { title: "Category", value: "category", align: "start", sortable: true },
+  { title: "Brand", value: "brand", align: "start", sortable: true },
+  { title: "Price", value: "price", align: "start", sortable: true },
+];
+const header = ref(initialHeader);
+
+onMounted(() => {
+  getData();
+});
+</script>
 
 <style scoped></style>

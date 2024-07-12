@@ -63,6 +63,55 @@ body,
   height: 100%;
   margin: 0;
 }
+.v-table__wrapper {
+  border: 1px solid;
+  border-color: #e0e0e0;
+}
+.v-table .v-table__wrapper > table > thead > tr > th,
+.v-table .v-table__wrapper > table > tbody > tr > td {
+  border-right: 1px solid;
+  border-color: #e0e0e0;
+}
+.v-table .v-table__wrapper > table > thead {
+  background-color: black;
+  color: white;
+}
+.v-data-table
+  .v-table__wrapper
+  > table
+  > thead
+  > tr
+  > th.v-data-table__th--sortable:hover {
+  color: white !important;
+}
+.v-input:focus {
+  outline: none !important;
+}
+.data-table-beauty > span {
+  border: 1px;
+  background-color: #dfa0b6;
+}
+.data-table-fragrances > span {
+  border: 1px;
+  background-color: #b2eff2;
+}
+.data-table-furniture > span {
+  border: 1px;
+  background-color: burlywood;
+}
+.data-table-groceries > span {
+  border: 1px;
+  background-color: #74c220;
+}
+.v-table
+  .v-table__wrapper
+  > table
+  > tbody
+  > tr:not(:last-child)
+  > td:first-child {
+  width: 50%;
+}
+
 /* Responsiveness of the nav name */
 @media only screen and (max-width: 960px) {
   .app-name {
