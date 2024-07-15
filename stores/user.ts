@@ -5,7 +5,7 @@ import { useRouter } from "vue-router";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
-    user: useCookie("user_details").value || null,
+    user: [],
     token: useCookie("token").value || null,
   }),
   actions: {
@@ -21,7 +21,6 @@ export const useUserStore = defineStore("user", {
         });
         // const token = useCookie("token");
         this.user = response.data;
-        return response.data;
       } catch (error) {
         console.error("Error fetching user:", error);
       }

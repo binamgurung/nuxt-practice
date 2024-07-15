@@ -16,7 +16,7 @@ export const useProductsStore = defineStore("products", {
         const response = await axios.get("https://dummyjson.com/products/");
         // console.log(response);
         this.products = response.data.products;
-        console.log(this.products);
+        // console.log(this.products);
       } catch (error) {
         console.error("Error fetching products:", error);
       }

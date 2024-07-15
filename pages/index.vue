@@ -72,7 +72,6 @@
     :header="header"
     :data="products"
     :table-loading="loading_products"
-    :search="search_keyword"
     class="mt-8 px-6"
   />
 </template>

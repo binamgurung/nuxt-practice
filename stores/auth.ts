@@ -39,7 +39,7 @@ export const useAuthStore = defineStore("auth", {
         token.value = data.token; // set token to cookie
         user.value = JSON.stringify(data);
         const userStore = useUserStore();
-        console.log(data);  
+        // console.log(data);
         userStore.setUser(data);
         this.authenticated = true; // set authenticated state value to true
       } catch (error) {

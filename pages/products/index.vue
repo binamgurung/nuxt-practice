@@ -25,7 +25,7 @@
         <v-btn variant="outlined" style="opacity: 50%" @click="hideFilter"
           >Hide Filter</v-btn
         >
-        <span style="float: right">{{ total_products }} results</span>
+        <span style="float: right">{{ products.length }} results</span>
       </div>
       <div style="width: 50%">
         <v-range-slider
@@ -55,7 +55,7 @@
         <v-btn variant="outlined" style="opacity: 50%" @click="showFilter"
           >Show Filter</v-btn
         >
-        <span class="mx-2">{{ total_products }} results</span>
+        <span class="mx-2">{{ products.length }} results</span>
       </div>
       <v-row>
         <v-col
@@ -78,6 +78,7 @@ import { ref, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useProductsByCategoryStore } from "~/stores/productsByCategory";
 import { useProductsStore } from "~/stores/products";
+import { storeToRefs } from "pinia";
 
 useHead({
   title: "Products",
@@ -94,13 +95,13 @@ const showFilter = () => {
   isFilterVisible.value = true;
 };
 
-const products = ref([]);
 const total_products = ref();
 const filteredProducts = ref([]);
 const priceRange = ref([0, 100]);
 const route = useRoute();
 const categoryStore = useProductsByCategoryStore();
 const productsStore = useProductsStore();
+const { products } = storeToRefs(productsStore);
 
 const filterProducts = () => {
   filteredProducts.value = products.value.filter((product) => {
@@ -114,10 +115,8 @@ const filterProducts = () => {
 onMounted(async () => {
   try {
     if (!route.query.category) {
-      const response = await productsStore.fetchProducts();
-      console.log(response);
-      products.value = response.products;
-      total_products.value = response.total;
+      await productsStore.fetchProducts();
+      console.log(products);
     } else {
       const category = route.query.category;
       const response = await categoryStore.fetchCategoryProducts(category);

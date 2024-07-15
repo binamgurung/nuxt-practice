@@ -69,7 +69,7 @@ const keyword = ref("");
 const search_keyword = ref("");
 const getKeyword = () => {
   search_keyword.value = keyword.value;
-  console.log(search_keyword.value);
+  //  console.log(search_keyword.value);
 };
 </script>
 
